@@ -58,53 +58,7 @@ require_once INCLUDES.'header.php';
 								<td><label for="password">Contraseña</label></td>
 								<td><input type="password" name="password" id="password" class="inputbox" /></td>
 							</tr>
-							<?php if(fAuthorization::checkAuthLevel('super')): ?>
-							<tr class="regionRow">
-								<td><label for="state">Estado</label></td>
-								<td>
-									<select class="state" name="state[]">
-										<option value="0">Estado</option>
-										<?php
-										$regions = Region::findAll(1);
-										foreach($regions as $item): ?>
-										<option value="<?php echo $item->prepareIdRegion() ?>"><?php echo $item->prepareName() ?></option>
-										<?php endforeach ?>
-									</select>
-								</td>
-								<td><label>Municipio<label></td>
-								<td class="regionCell">
-									<select class="region" name="region[]">
-										<option value="0">Municipio</option>
-									</select>
-								</td>
-								<td colspan="4">
-									<a id="anotherRegion" href="" style="margin-right:20px">Agregar otro municipio</a>
-								</td>
-							</tr>
-							<?php else: ?>
-							<tr>
-								<td class="privilege" colspan="8"><input type="checkbox" id="selectRegions" /><label for="selectRegions">Seleccionar todos los municipios</label></td>
-							</tr>
-							<?php
-								$regions = fSession::get('regs');
-								$i = 0;
-								foreach($regions as $item) {
-									$i++;
-									if($i == 1) echo '<tr>';
-									$region = new Region($item);
-									echo '<td colspan="2"><input type="checkbox" id="'.str_replace(' ','-',$region->prepareName()).'" class="region" name="region[]" value="'.$region->prepareIdRegion().'" /><label for="'.str_replace(' ','-',$region->prepareName()).'">'.$region->prepareName().'</label></td>';
-									if($i == 4) {
-										echo '</tr>';
-										$i = 0;
-									}
-								}
-								if($i < 4) {
-									for($i;$i<4;$i++)
-										echo '<td colspan="2"></td>';
-									echo '</tr>';
-								}
-							?>
-							<?php endif ?>
+							
 							<tr>
 								<td><label for="role">Rol</label></td>
 								<td>

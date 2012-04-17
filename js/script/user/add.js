@@ -79,45 +79,23 @@ $(document).ready(function() {
 				$('input.permission').attr('checked','checked');
 				$('#selectPermissions').attr('checked','checked');
 				break;
-			case 2:
-				$('input.permission').attr('checked','checked');
-				if(l == 'super') {
-					$('#Franquicias input.permission').removeAttr('checked');
-					$('#selectPermissions').removeAttr('checked');
-				} else $('#selectPermissions').attr('checked','checked');
-				break;
+			
 			case 3:
+				$('input.permission').removeAttr('checked');
+				$('#selectPermissions').removeAttr('checked');
+				$('#Geolocalización input.permission').attr('checked','checked');
+				break;
 			case 4:
-			case 5:
-				$('input.permission').removeAttr('checked');
-				$('#selectPermissions').removeAttr('checked');
-				$('#Noticias input.permission').attr('checked','checked');
-				break;
-			case 6:
-				$('input.permission').removeAttr('checked');
-				$('#selectPermissions').removeAttr('checked');
-				$('#Plaza-Virtual input.permission').attr('checked','checked');
-				break;
-			case 7:
-				$('input.permission').removeAttr('checked');
-				$('#selectPermissions').removeAttr('checked');
-				$('#Vidanova input.permission').attr('checked','checked');
-				break;
-			case 8:
-				$('input.permission').removeAttr('checked');
-				$('#selectPermissions').removeAttr('checked');
-				$('#Clasificados input.permission').attr('checked','checked');
-				break;
-			case 9:
-				$('input.permission').removeAttr('checked');
-				$('#selectPermissions').removeAttr('checked');
-				$('#Auto-Plus input.permission').attr('checked','checked');
-				break;
-			case 10:
-				$('input.permission').removeAttr('checked');
+			$('input.permission').removeAttr('checked');
 				$('#selectPermissions').removeAttr('checked');
 				$('#Usuarios input.permission').attr('checked','checked');
 				break;
+			case 2:
+				$('input.permission').removeAttr('checked');
+				$('#selectPermissions').removeAttr('checked');
+				$('#Publicidad input.permission').attr('checked','checked');
+				break;
+			
 			default:
 				$('input.permission').removeAttr('checked');
 				$('#selectPermissions').removeAttr('checked');

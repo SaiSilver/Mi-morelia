@@ -2,25 +2,17 @@
 
 		fSession::open();
 			$idUser = fSession::get(SESSION_ID_USER);
-			//if(empty($idUser) || !fAuthorization::checkACL('banner', 'edit')) {
+			if(empty($idUser) || !fAuthorization::checkACL('banner', 'edit')) {
 			if(empty($idUser)) {
 				header('Location: '.SITE);
 				exit("No se ha podido acceder a esta secci&oacite;n");
 			}
-				$id_region = fRequest::encode('id_region', 'array');
-				$total_regions = count($id_region);
-	
+			}
 	
 				$id_banner = fRequest::encode('id_banner', 'integer');
 	
 	
-	if(!fAuthorization::checkAuthLevel('super')) {
-				$isOwner = fRecordSet::build('BannerRegion', array('id_banner=' => $id_banner, 'id_region='=>fSession::get('regs')));
-				$count = $isOwner->count() > 0;
-			
-				if(!$count) 
-					exit("0");
-	}
+	
 	
 				/*
 				 * Add Article
@@ -41,27 +33,9 @@
 				} catch (Exception $e){
 					exit ("Ha ocurrido un error.");
 				}
-				$lastId = fORMDatabase::retrieve()->getLastId();
 				
-				/*
-				 * Add Region 
-				 * Limited By User Permissions
-				 */
-				 
-				 $regions = BannerRegion::findRegions($id_banner);
-				 $regionsE = count($regions);
-				 foreach($regions as $r) {
-					$rgs = new BannerRegion(array("id_region" => $r->prepareId_region(), "id_banner"=>$id_banner));
-					$rgs->delete();
-				 }
-					
-				for($i = 0; $i < $total_regions; $i++){
-					$region = new BannerRegion();
 				
-					$region->setId_region($id_region[$i]);
-					$region->setId_banner($id_banner);
-					$region->store();
-				}
+				
 			
 				/*
 				 * Add Files to Server
@@ -77,8 +51,8 @@
 				
 				
 			
-				$dir = '../uploads/banners/';
-				$dir2 = '../uploads/banners/thumbs/';
+				$dir = 'uploads/banners/';
+				$dir2 = 'uploads/banners/thumbs/';
 				
 				$imageDescrip = fRequest::encode('imageDescrip');
 				
@@ -104,10 +78,10 @@
 					*/
 				 
 					try {
-						$statement = fORMDatabase::retrieve()->prepare("INSERT INTO resource (id_entity,id_section,token,url,resource_type,description) VALUES (%i, 1, '', %s, %s, %s)");
+						$statement = fORMDatabase::retrieve()->prepare("UPDATE resource SET url = %s, description = %s, resource_type = %s WHERE id_entity = %i AND id_section = 1 ");
 						for ($i=0; $i < $uploaded; $i++) { 
 						  if($imageDescrip[$i] == "Si es necesario escribe la descripci&oacute;n del archivo") $imageDescrip[$i] = "";
-						fORMDatabase::retrieve()->query($statement, $id_banner, $fileName[$i], $banner->getResourceType($fileType[$i]), $imageDescrip[$i]); 
+						fORMDatabase::retrieve()->query($statement, $fileName[$i], $imageDescrip[$i], $banner->getResourceType($fileType[$i]),  $id_banner); 
 					
 						}
 					} catch (fSQLException $e){

@@ -11,28 +11,17 @@ $sub = 'add';
 			}
 require_once  INCLUDES.'header.php';
 ?>
-			<link rel="stylesheet" href="<?php echo JS ?>jwysiwyg/jquery.wysiwyg.css" type="text/css" />
-			<link rel="stylesheet" href="<?php echo CSS ?>ui-lightness/jquery-ui-1.8.16.custom.css" type="text/css" />
 			
 			
-			<script type="text/javascript" src="<?php echo JS ?>jwysiwyg/jquery.wysiwyg.js"></script>
+			
+			
 			<script type="text/javascript" src="<?php echo JS ?>upload/jquery.MultiFile.js"></script>
 			<script type="text/javascript" src="<?php echo JS ?>jquery.form.js"></script>
-			<script type="text/javascript" src="<?php echo JS ?>jquery-ui-1.8.16.custom.min.js"></script>
-			
-<link rel="stylesheet" href="<?php echo CSS ?>multiselect.css" type="text/css" />
-<script type="text/javascript" src="<?php echo JS ?>plugins/localisation/jquery.localisation-min.js"></script>
-<script type="text/javascript" src="<?php echo JS ?>plugins/scrollTo/jquery.scrollTo-min.js"></script>
-			<script type="text/javascript" src="<?php echo JS ?>ui.multiselect.js"></script>
-	<script src="<?php echo JS ?>jquery.validate.min.js"></script>
+			<script src="<?php echo JS ?>jquery.validate.min.js"></script>
 			
 			
 			<script type="text/javascript" src="<?php echo SCRIPT . $section . DS .  $sub; ?>.js"></script>
-			<script>
-			$(function(){
-				$("input.search").width(100);
-			});
-			</script>
+			
 			<!-- MAIN CONTAINER -->
 			<div id="ja-container" class="wrap ja-r2">
 				<div class="main clearfix">

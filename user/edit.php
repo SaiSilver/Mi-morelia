@@ -1,6 +1,6 @@
 <?php
 require_once '../init.php';
-$id_section = 10;
+$id_section = 2;
 $section = 'user';
 $sub = 'edit';
 $idUser = fRequest::encode('id','integer');
@@ -71,97 +71,7 @@ require_once INCLUDES.'header.php';
 								<td><label for="password">Contraseña</label></td>
 								<td><input type="password" name="password" id="password" class="inputbox" /></td>
 							</tr>
-							<?php
-							if(fAuthorization::checkAuthLevel('super')):
-								$r = new Region();
-								$ur = new UserRegion();
-								$userRegions = $ur->getByIdUser($u->getIdUser());
-								$regions = $r->findAll(1);
-								try {
-								foreach($userRegions as $item):?>
-								<tr class="regionRow">
-									<td><label>Estado</label></td>
-									<td>
-										<select class="state" name="state">
-											<option value="0">Estado</option>
-											<?php
-											print_r($item);
-											$city = new Region($item->getIdRegion());
-											foreach($regions as $region):
-												if($region->getIdRegion() != $city->getIdParent()): ?>
-													<option value="<?php echo $region->getIdRegion() ?>"><?php echo $region->prepareName() ?></option>
-												<?php else: ?>
-													<option value="<?php echo $region->getIdRegion() ?>" selected="selected"><?php echo $region->prepareName() ?></option>
-												<?php endif ?>
-											<?php endforeach ?>
-										</select>
-									</td>
-									<td><label>Municipio<label></td>
-									<td class="regionCell">
-										<select class="region" name="region[]">
-											<option value="0">Municipio</option>
-											<?php $tmpRegions = $r->findAll($city->getIdParent());
-											foreach($tmpRegions as $region):
-												if($region->getIdRegion() != $city->getIdRegion()): ?>
-													<option value="<?php echo $region->getIdRegion() ?>"><?php echo $region->prepareName() ?></option>
-												<?php else: ?>
-													<option value="<?php echo $region->getIdRegion() ?>" selected="selected"><?php echo $region->prepareName() ?></option>
-												<?php endif ?>
-											<?php endforeach ?>
-										</select>
-									</td>
-									<td colspan="4">
-										<a class="deleteRegion" href="">Quitar municipio</a>
-									</td>
-								</tr>
-								<?php endforeach ?>
-							<?php } catch(Exception $e) {}?>
-							<tr class="regionRow">
-								<td><label>Estado</label></td>
-								<td>
-									<select class="state" name="state">
-										<option value="0">Estado</option>
-										<?php
-										foreach($regions as $item): ?>
-										<option value="<?php echo $item->getIdRegion() ?>"><?php echo $item->prepareName() ?></option>
-										<?php endforeach ?>
-									</select>
-								</td>
-								<td><label>Municipio<label></td>
-								<td class="regionCell">
-									<select class="region" name="region[]">
-										<option value="0">Municipio</option>
-									</select>
-								</td>
-								<td colspan="4">
-									<a id="anotherRegion" href="">Agregar otro municipio</a>
-								</td>
-							</tr>
-							<?php else: ?>
-							<tr>
-								<td class="privilege" colspan="8"><input type="checkbox" id="selectRegions" /><label for="selectRegions">Seleccionar todos los municipios</label></td>
-							</tr>
-							<?php
-								$regions = fSession::get('regs');
-								$i = 0;
-								foreach($regions as $item) {
-									$i++;
-									if($i == 1) echo '<tr>';
-								//	$region = new Region($item);
-//									if($region->getIdRegion() == 
-									echo '<td colspan="2"><input type="checkbox" id="'.str_replace(' ','-',$region->prepareName()).'" class="region" name="region[]" value="'.$region->getIdRegion().'" /><label for="'.str_replace(' ','-',$region->prepareName()).'">'.$region->prepareName().'</label></td>';
-									if($i == 4) {
-										echo '</tr>';
-										$i = 0;
-									}
-								}
-								if($i < 4) {
-									for($i;$i<4;$i++)
-										echo '<td colspan="2"></td>';
-									echo '</tr>';
-								}
-							?>
-							<?php endif ?>
+							
 							<tr>
 								<td><label for="role">Rol</label></td>
 								<td>

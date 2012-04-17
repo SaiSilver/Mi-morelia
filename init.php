@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors','On');
 date_default_timezone_set('America/New_York');
-define('DS',DIRECTORY_SEPARATOR);
+define('DS',"/");
 define('ROOT', $_SERVER['DOCUMENT_ROOT'].DS.'adminv3'.DS);
 
 function __autoload($className) {

@@ -30,18 +30,8 @@ try {
 		switch($u->prepareIdRole()) {
 			case 1:fAuthorization::setUserAuthLevel('super');break;
 			case 2:fAuthorization::setUserAuthLevel('admin');break;
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:fAuthorization::setUserAuthLevel('employee');break;
-			case 9:
-			case 10: fAuthorization::setUserAuthLevel('adminUsers');break;
-			case 11: fAuthorization::setUserAuthLevel('guest');break;
-			case 12: fAuthorization::setUserAuthLevel('cliente');break;
-			case 13: fAuthorization::setUserAuthLevel('cliente');break;
-			case 14: fAuthorization::setUserAuthLevel('cliente');break;
+			case 3:fAuthorization::setUserAuthLevel('admin');break;
+			case 4:fAuthorization::setUserAuthLevel('admin');break;
 			default:fAuthorization::setUserAuthLevel('guest');break;
 		}
 		$up = new UserPermission();

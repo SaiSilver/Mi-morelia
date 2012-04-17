@@ -17,6 +17,6 @@
 					$banner = new Banner($id);
 					$banner->delete();
 				}
-				fORMDatabase::retrieve()->query("DELETE FROM bannerregion WHERE id_banner IN ($id)");
+
 				fORMDatabase::retrieve()->query("DELETE FROM resource WHERE id_entity IN ($id) AND id_section = 1");
 ?>

@@ -1,12 +1,12 @@
 <?php
 		fSession::open();
 			$idUser = fSession::get(SESSION_ID_USER);
-			//if(empty($idUser) || !fAuthorization::checkACL('banner', 'add')) {
+			if(empty($idUser) || !fAuthorization::checkACL('banner', 'add')) {
 			if(empty($idUser)) {
 				header('Location: '.SITE);
 				exit("No se ha podido acceder a esta secci&oacite;n");
 			}
-	
+	}
 	
 
 	//echo  fRequest::encode('id_zone','integer');
@@ -30,7 +30,7 @@
 					exit ("Ha ocurrido un error.");
 				}
 				
-				$lastId = fORMDatabase::retrieve()->getLastId();
+				$lastId = $banner->prepareIdBanner();
 				
 				/*
 				 * Add Region 
@@ -52,8 +52,8 @@
 				
 				
 				
-				$dir = '../uploads/banners/';
-				$dir2 = '../uploads/banners/thumbs/';
+				$dir = 'uploads/banners/';
+				$dir2 = 'uploads/banners/thumbs/';
 				
 				$imageDescrip = fRequest::encode('imageDescrip');
 				
